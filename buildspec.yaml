@@ -11,6 +11,8 @@ phases:
   pre_build:
     commands:
       - terraform init
+      - pwd
+      - ls -la
 
   build:
     commands:
