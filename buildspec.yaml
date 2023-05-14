@@ -10,8 +10,8 @@ phases:
       - "mv terraform /usr/local/bin/"
   pre_build:
     commands:
-      - terraform destroy -var-file="dev/terraform.tfvars"  -auto-approve
       - terraform init
+      - terraform destroy -var-file="dev/terraform.tfvars"  -auto-approve
 
   build:
     commands:
