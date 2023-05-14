@@ -7,10 +7,18 @@ sudo yum update -y
 sudo yum -y install python-pip
 sudo pip3 install flask
 
-# sudo su - ec2-user
-# sudo yum install ruby wget -y
-# sudo cd /home/ec2-user
-# sudo wget https://aws-codedeploy-eu-central-1.s3.eu-central-1.amazonaws.com/latest/install
-# sudo chmod +x ./install
-# sudo ./install auto
+sudo cat << EOF > helloworld.py
+#!/usr/bin/python
+from flask import Flask
 
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'Web App with Python Flask!'
+
+app.run(host='0.0.0.0', port=80)
+EOF
+
+sudo chmod 755 helloworld.py
+sudo python3 helloworld.py
