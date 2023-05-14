@@ -13,13 +13,13 @@ This repository provides a POC to deploy a Ghost webapp running on Nginx Server 
 
 
 # Architecuture 
-![Alt text](images/main-architecutre.jpg?raw=true "Title")
+![Alt text](images/main-architecutre.png?raw=true "Title")
 
 
 
 # Directory Structure
 The Directory follows the following structure:
-![Alt text](images/directory.jpg?raw=true "Title")
+![Alt text](images/directory.png?raw=true "Title")
 
 # Deployment steps
 1. Install Terraform on your local machine by following the [link](https://learn.hashicorp.com/tutorials/terraform/install-cli). Minimum version required is `1.2.8`.
@@ -42,10 +42,6 @@ The Directory follows the following structure:
 
 For every change in the infrastrucure repeat steps 8-9.
 
-
-# Multi-Account Architecture
-Following multi-account strategy can be used to create AWS Organisations:
-![Alt text](images/multi-acc.jpg?raw=true "Title")
 
 # Improvements
 1. Cloudfront with WAF can be used for cache and DDoS attacks and make the website avaliable only via Cloudfront by using custom header.
