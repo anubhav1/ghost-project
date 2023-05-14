@@ -16,8 +16,8 @@ phases:
 
   build:
     commands:
-      - terraform $TF_COMMAND  -auto-approve
+      - terraform apply -var-file="dev/terraform.tfvars"  -auto-approve
 
   post_build:
     commands:
-      - echo terraform $TF_COMMAND  completed on `date`
+      - echo terraform apply -var-file="dev/terraform.tfvars"  completed on `date`
