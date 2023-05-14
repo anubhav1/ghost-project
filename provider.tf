@@ -11,7 +11,7 @@ terraform {
 
 provider "aws" {
   //alias  = "primary"
-  //profile = "default"  
+  //profile = "main-admin"  
   region  = "${var.primary_region}"
 }
 
