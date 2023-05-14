@@ -22,7 +22,7 @@ terraform {
       bucket = "ghost-tf-state-bucket78277"
       dynamodb_table = "tf-state-lock-db"
       key = "path/path/terraform.tfstate"
-      region = "eu-central-1" 
+      region = "eu-central-1"  
   }
 }
 
