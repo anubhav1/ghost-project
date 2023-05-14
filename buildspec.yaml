@@ -13,6 +13,8 @@ phases:
       - terraform init
       - pwd
       - ls -la
+      - cat ./dev/terraform.tfvars
+      - cat dev/terraform.tfvars
 
   build:
     commands:
