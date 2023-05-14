@@ -148,7 +148,7 @@ resource "aws_autoscaling_group" "ghost_asg" {
   min_size             = 2
   max_size             = 5
   desired_capacity     = 2
-  vpc_zone_identifier = ["${aws_subnet.private-subnet-a.id}", "${aws_subnet.private-subnet-b.id}"]
+  vpc_zone_identifier = ["${aws_subnet.application-subnet-a.id}", "${aws_subnet.application-subnet-b.id}"]
   launch_template {
     id      = "${aws_launch_template.ghostLaunchTemplate.id}"
     version = "$Latest"
