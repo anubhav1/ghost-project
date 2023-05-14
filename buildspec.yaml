@@ -10,11 +10,11 @@ phases:
       - "mv terraform /usr/local/bin/"
   pre_build:
     commands:
-      - terraform init
-      - pwd
+      - cd ~/.aws
       - ls -la
-      - cat ./dev/terraform.tfvars
-      - cat dev/terraform.tfvars
+      - terraform init
+      
+
 
   build:
     commands:
