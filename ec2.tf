@@ -39,7 +39,7 @@ tags = {
 
 # Creating Security Group for EC2
 resource "aws_security_group" "ec2-sg" {
-vpc_id = aws_vpc.ghostvpc.id
+vpc_id = "${aws_vpc.ghostvpc.id}"
 # Inbound Rules
   # HTTP access from anywhere
   ingress {
@@ -197,7 +197,7 @@ resource "aws_lb_target_group" "ghost-target-group" {
   target_type = "instance"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.ghostvpc.id
+  vpc_id   = "${aws_vpc.ghostvpc.id}"
   health_check {
   healthy_threshold = 5
   matcher = 200
