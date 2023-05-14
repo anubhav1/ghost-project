@@ -1,5 +1,5 @@
 #!/bin/bash
-su - ubuntu
+su - ubuntu  
 sudo apt-get update
 sudo apt-get -y upgrade
 sudo yum update -y
