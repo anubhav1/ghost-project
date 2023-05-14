@@ -46,14 +46,14 @@ vpc_id = "${aws_vpc.ghostvpc.id}"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    security_groups  = [aws_security_group.alb-sg.id]
+    security_groups  = ["${aws_security_group.alb-sg.id}"]
   }
 # HTTPS access from anywhere
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    security_groups  = [aws_security_group.alb-sg.id]
+    security_groups  = ["${aws_security_group.alb-sg.id}"]
   }
 # SSH access from anywhere
   ingress {
@@ -79,7 +79,7 @@ tags = {
 # Create EC2 Instance Profile
 resource "aws_iam_instance_profile" "ec2_ssm_profile" {
   name = "${var.ec2_ssm_profile}"
-  role = aws_iam_role.ec2_ssm_role.name
+  role = "${aws_iam_role.ec2_ssm_role.name}"
 }
 
 resource "aws_iam_role" "ec2_ssm_role" {
@@ -100,7 +100,7 @@ resource "aws_iam_role" "ec2_ssm_role" {
     }
 
 resource "aws_iam_role_policy_attachment" "ec2-ssm-policy" {
-  role       = aws_iam_role.ec2_ssm_role.name
+  role       = "${aws_iam_role.ec2_ssm_role.name}"
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
@@ -109,7 +109,7 @@ resource "aws_iam_role_policy_attachment" "ec2-ssm-policy" {
 resource "aws_launch_template" "ghostLaunchTemplate" {
   name = "GhostLaunchTemplate"
   iam_instance_profile {
-    arn = aws_iam_instance_profile.ec2_ssm_profile.arn
+    arn = "${aws_iam_instance_profile.ec2_ssm_profile.arn}"
   }
   image_id = "${var.ami_id}"
   instance_type = "${var.instance_type}"
@@ -117,7 +117,7 @@ resource "aws_launch_template" "ghostLaunchTemplate" {
   monitoring {
     enabled = true
   }
-  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
+  vpc_security_group_ids = ["${ws_security_group.ec2-sg.id}"]
   tag_specifications {
     resource_type = "instance"
 
@@ -148,9 +148,9 @@ resource "aws_autoscaling_group" "ghost_asg" {
   min_size             = 2
   max_size             = 5
   desired_capacity     = 2
-  vpc_zone_identifier = [aws_subnet.public-subnet-a.id, aws_subnet.public-subnet-b.id]
+  vpc_zone_identifier = ["${aws_subnet.public-subnet-a.id}", "${aws_subnet.public-subnet-b.id}"]
   launch_template {
-    id      = aws_launch_template.ghostLaunchTemplate.id
+    id      = "${aws_launch_template.ghostLaunchTemplate.id}"
     version = "$Latest"
   }
   health_check_grace_period = 150
@@ -161,7 +161,7 @@ resource "aws_autoscaling_group" "ghost_asg" {
     value               = "Ghost Website ASG"
     propagate_at_launch = true
   }
-  target_group_arns = [aws_lb_target_group.ghost-target-group.arn]
+  target_group_arns = ["${aws_lb_target_group.ghost-target-group.arn}"]
 }
 
 # Create Application LoadBalancer
@@ -169,14 +169,14 @@ resource "aws_lb" "external-ghost-alb" {
   name               = "ExternalGhostALB"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.alb-sg.id]
-  subnets            = [aws_subnet.public-subnet-a.id, aws_subnet.public-subnet-b.id]
+  security_groups    = ["${aws_security_group.alb-sg.id}"]
+  subnets            = ["${aws_subnet.public-subnet-a.id}", "${aws_subnet.public-subnet-b.id}"]
 }
 
 
 # Create ALB Listener
 resource "aws_lb_listener" "ghost_listener" {
-  load_balancer_arn = aws_lb.external-ghost-alb.arn
+  load_balancer_arn = "${aws_lb.external-ghost-alb.arn}"
    port              = 80
   protocol          = "HTTP"
   # port              = "443"
@@ -186,7 +186,7 @@ resource "aws_lb_listener" "ghost_listener" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.ghost-target-group.arn
+    target_group_arn = "${aws_lb_target_group.ghost-target-group.arn}"
   }
   # depends_on = [time_sleep.wait]
 }
