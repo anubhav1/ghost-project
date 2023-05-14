@@ -1,6 +1,6 @@
 # Creating Security Group for ALB 
 resource "aws_security_group" "alb-sg" {
-vpc_id = aws_vpc.ghostvpc.id
+vpc_id = "${aws_vpc.ghostvpc.id}"
 # Inbound Rules
   # HTTP access from anywhere
   ingress {
