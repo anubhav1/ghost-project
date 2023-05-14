@@ -45,16 +45,16 @@ resource "aws_s3_bucket_public_access_block" "terraform-state-save-bucket-block"
   restrict_public_buckets = true
 }
 
-## Specifies the S3 Bucket and DynamoDB table used for the durable backend and state locking
-# terraform {
-#     backend "s3" {
-#       encrypt = true
-#       bucket = "${var.tf_state_save_bucket}"
-#       dynamodb_table = "${var.tf_state_lock_db}"
-#       key = "path/path/terraform.tfstate"
-#       region = "${var.primary_region}"
-#   }
-# }
+# Specifies the S3 Bucket and DynamoDB table used for the durable backend and state locking
+terraform {
+    backend "s3" {
+      encrypt = true
+      bucket = "${var.tf_state_save_bucket}"
+      dynamodb_table = "${var.tf_state_lock_db}"
+      key = "path/path/terraform.tfstate"
+      region = "${var.primary_region}"
+  }
+}
 
 
 
