@@ -65,18 +65,6 @@ variable "application_subnet_B_cidr" {
   //default     = "10.0.4.0/24"
 }
 
-variable "database_subnet_A_cidr" {
-  description = "DB subnets"
-  type        = string
- // default     = "10.0.5.0/24"
-}
-
-variable "database_subnet_B_cidr" {
-  description = "DB subnets"
-  type        = string
-  // default     = "10.0.6.0/24"
-}
-
 variable "ami_id" {
   description = "AMI ID"
   type        = string
@@ -106,44 +94,6 @@ variable "cpu_target_value" {
   type        = string
 }
 
-variable "rds_allocated_storage" {
-  description = "RDS Allocated Storage"
-  type        = number
-}
-
-variable "rds_identifier" {
-  description = "RDS Identifier"
-  type        = string
-}
-variable "rds_read_replica_identifier" {
-  description = "RDS Identifier"
-  type        = string
-}
-variable "rds_engine" {
-  description = "RDS Engine"
-  type        = string
-  default = "mysql"
-}
-variable "rds_engine_version" {
-  description = "RDS Engine Version"
-  type        = string
-  default = "8.0.28"
-}
-variable "rds_instance_class" {
-  description = "RDS Instance Class"
-  type        = string
-  default = "db.t3.micro"
-}
-variable "rds_db_name" {
-  description = "RDS DB Name"
-  type        = string
-}
-
-variable "rds_secret_id" {
-  description = "RDS Secret ID"
-  type        = string
-}
-
 variable "route53_zone_id" {
   description = "route53 Zone Id"
   type        = string
@@ -153,21 +103,5 @@ variable "route53_record_name" {
   description = "route53 Record Name"
   type        = string
 }
-
-variable "api_stage_name" {
-  description = "Api Stage Name"
-  type        = string
-}
-
-variable "lambda_bucket_name" {
-  description = "Lambda Bucket Name"
-  type        = string
-}
-
-variable "ghost_admin_api_secret" {
-  description = "Ghost Admin Api Secret Name"
-  type        = string
-}
-
 
 
