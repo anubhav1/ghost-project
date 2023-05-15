@@ -24,9 +24,10 @@ The Directory follows the following structure:
    terraform apply -var-file="dev/terraform.tfvars"
    ```
 7. It will create the pipeline in your specified region. 
-8.  Now come to the `/dev` folder of root directory and provide the values to the variables in `terraform.tfvars` file. Makes sure value of the `region` is the same which you provided in `pipelines/dev/terraform.tfvars` file .
-9.  Push the contents inside the directory in github.
-10. This will trigger the pipeline and deploy the three-tier architecture in the same region.
+8.  Now come to the `/dev` folder of root directory and provide the values to the variables in `terraform.tfvars` file. Makes sure value of the `region` is the same which you provided in `pipelines/dev/terraform.tfvars` file.
+9. Again create a S3 bucket and a dynamo db table to save terraform states and provide those names in `project>provider.tf` inside `terraform` block.
+10. Push the contents inside the directory in github.
+11. This will trigger the pipeline and deploy the three-tier architecture in the same region.
 
 For every change in the infrastrucure repeat steps 8-9.
 
