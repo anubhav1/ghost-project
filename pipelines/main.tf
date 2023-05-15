@@ -15,16 +15,16 @@ provider "aws" {
   region  = "${var.region}"
 }
 
-# ## Specifies the S3 Bucket and DynamoDB table used for the durable backend and state locking
-# terraform {
-#     backend "s3" {
-#       encrypt = true
-#       bucket = aws_s3_bucket.my-tf-test-bucket7827.name
-#       dynamodb_table = aws_dynamodb_table.terraform-state-lock-dynamo.name
-#       key = "path/path/terraform.tfstate"
-#       region = "eu-central-1"
-#   }
-# }
+## Specifies the S3 Bucket and DynamoDB table used for the durable backend and state locking
+terraform {
+    backend "s3" {
+      encrypt = true
+      bucket = aws_s3_bucket.my-tf-test-bucket7827.name
+      dynamodb_table = aws_dynamodb_table.terraform-state-lock-dynamo.name
+      key = "path/path/terraform.tfstate"
+      region = "eu-central-1"
+  }
+}
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "${var.codepipeline_artifacts_bucket}"
