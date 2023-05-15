@@ -11,7 +11,7 @@ This repository provides a POC to deploy a Ghost webapp running inside two-tier 
 The Directory follows the following structure:
 ![Alt text](images/directory.png?raw=true "Title")
 
-# Deployment steps
+# Deployment steps for pipeline
 1. Install Terraform on your local machine by following the [link](https://learn.hashicorp.com/tutorials/terraform/install-cli). Minimum version required is `1.2.8`.
 2. Install git and configure it in your local machine by following the [link](https://github.com/git-guides/install-git).
 3. Install aws cli v2 and configure the `default` profile by following the [link](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
@@ -24,10 +24,14 @@ The Directory follows the following structure:
    terraform apply -var-file="dev/terraform.tfvars"
    ```
 7. It will create the pipeline in your specified region. 
-8.  Now come to the `/dev` folder of root directory and provide the values to the variables in `terraform.tfvars` file. Makes sure value of the `region` is the same which you provided in `pipelines/dev/terraform.tfvars` file.
-9. Again create a S3 bucket and a dynamo db table to save terraform states and provide those names in `project>provider.tf` inside `terraform` block.
-10. Push the contents inside the directory in github.
-11. This will trigger the pipeline and deploy the three-tier architecture in the same region.
+   
+
+# Deployment steps for infrastructure   
+1.  Now come to the `projects/dev` folder and provide the values to the variables in `terraform.tfvars` file. Makes sure value of the `region` is the same which you provided in `pipelines/dev/terraform.tfvars` file.
+2.  Create a key value pair to ssh access your EC2 instance and provide the `key_name` in `projects>dev>terraform.vars`.
+3.  Again create a S3 bucket and a dynamo db table to save terraform states and provide those names in `project>provider.tf` inside `terraform` block.
+4. Push the contents inside the directory in github.
+5. This will trigger the pipeline and deploy the three-tier architecture in the same region.
 
 For every change in the infrastrucure repeat steps 8-9.
 
